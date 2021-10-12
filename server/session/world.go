@@ -468,12 +468,12 @@ func (s *Session) ViewSound(pos mgl64.Vec3, soundType world.Sound) {
 		ExtraData:  -1,
 	}
 	switch so := soundType.(type) {
-	case sound.Named:
+	case sound.PlaySound:
 		s.writePacket(&packet.PlaySound{
-			SoundName: so.Name,
+			SoundName: so.SoundName,
 			Position:  vec64To32(pos),
-			Volume:    float32(so.Volume),
-			Pitch:     float32(so.Pitch),
+			Volume:    so.Volume,
+			Pitch:     so.Pitch,
 		})
 		return
 	case sound.Note:
